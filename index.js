@@ -303,6 +303,62 @@ async function run() {
       res.send(result);
     });
 
+    // update payment info
+    app.put("/paymentbooked", verifyingToken, async (req, res) => {
+      const email = req.query.email;
+      const decodedEmail = req.decoded.email;
+      if (email !== decodedEmail) {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+      const sellerEmail = req.query.sellerEmail;
+      const productName = req.query.product_name;
+
+      const filter = {
+        sellerEmail:sellerEmail,
+        product_name:productName
+
+       };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          sold: true,
+        },
+      };
+
+      const result = await bookedproductcollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.send(result);
+    });
+
+
+    // capaigning books
+    app.put("/campaign", verifyingToken, async (req, res) => {
+      const email = req.query.email;
+      const decodedEmail = req.decoded.email;
+      if (email !== decodedEmail) {
+        return res.status(403).send({ message: "forbidden access" });
+      }
+      const id = req.query.productId;
+      console.log(id);
+      const filter = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          campain: true,
+        },
+      };
+
+      const result = await allProductscollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.send(result);
+    });
+
     // report books - to admin
     app.put("/report", verifyingToken, async (req, res) => {
       const email = req.query.email;
