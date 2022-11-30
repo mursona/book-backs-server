@@ -55,7 +55,7 @@ async function run() {
     app.get("/categories", async (req, res) => {
       const query = {};
       const categoriesbook = await productcategoriesCollection
-        .find(query)
+        .find(query , {_id:1,_id:0}).sort({"_id":-1})
         .toArray();
       res.send(categoriesbook);
     });
