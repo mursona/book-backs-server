@@ -26,5 +26,5 @@ You may also see any lint errors in the console.
 [https://book-back-server.vercel.app/categories](https://book-back-server.vercel.app/categories)
 
 ## Admin Route Check
-adminEmail: <mursona.cse.bu@gmail.com>
-adminPassword: <@1234Admin>
+adminEmail: mursona.cse.bu@gmail.com
+adminPassword: @1234Admin
