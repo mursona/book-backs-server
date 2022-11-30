@@ -84,7 +84,7 @@ async function run() {
         return res.status(403).send({ message: "forbidden access" });
       }
       const query = { role: "seller" };
-      const seller = await userscollection.find(query).toArray();
+      const seller = await userscollection.find(query, {_id:1,_id:0}).sort({"_id":-1}).toArray();
       res.send(seller);
     });
 
@@ -106,7 +106,7 @@ async function run() {
         return res.status(403).send({ message: "forbidden access" });
       }
       const query = { role: "buyer" };
-      const seller = await userscollection.find(query).toArray();
+      const seller = await userscollection.find(query, {_id:1,_id:0}).sort({"_id":-1}).toArray();
       res.send(seller);
     });
 
